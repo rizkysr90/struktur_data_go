@@ -21,10 +21,22 @@ func (this *MyLinkedList) AddAtHead(val int) {
 		this.link = &node
 	}
 }
+func (this *MyLinkedList) AddAtTail(val int) {
+	node := Constructor()
+
+	currNode := this
+	for currNode.link != nil {
+		currNode = currNode.link
+	}
+	currNode.link = &node
+	node.data = val
+	node.link = nil
+}
 
 func main() {
 	obj := Constructor()
 	obj.AddAtHead(100)
-	fmt.Println(obj)
+	obj.AddAtTail(200)
+	fmt.Println(obj.link)
 
 }
