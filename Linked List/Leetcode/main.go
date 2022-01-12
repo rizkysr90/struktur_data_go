@@ -2,41 +2,38 @@ package main
 
 import "fmt"
 
-type MyLinkedList struct {
+type Node struct {
 	data int
-	link *MyLinkedList
+	next *Node
+}
+type singleList struct {
+	head   *Node
+	length int
 }
 
-func Constructor() MyLinkedList {
-	return MyLinkedList{}
+func Constructor() *singleList {
+	return &singleList{}
 }
-func (this *MyLinkedList) AddAtHead(val int) {
-	node := Constructor()
-	node = *this
 
-	this.data = val
-	if node.link == nil {
-		this.link = nil
-	} else {
-		this.link = &node
-	}
-}
-func (this *MyLinkedList) AddAtTail(val int) {
-	node := Constructor()
-
-	currNode := this
-	for currNode.link != nil {
-		currNode = currNode.link
-	}
-	currNode.link = &node
+func (l *singleList) AddAtHead(val int) {
+	node := Node{}
 	node.data = val
-	node.link = nil
+	if l.head == nil {
+		node.next = nil
+	} else {
+		node.next = l.head
+	}
+	l.head = &node
+	l.length++
 }
 
 func main() {
-	obj := Constructor()
-	obj.AddAtHead(100)
-	obj.AddAtTail(200)
-	fmt.Println(obj.link)
+	MyLinkedList := Constructor()
+	MyLinkedList.AddAtHead(10)
+	fmt.Println(MyLinkedList)
+
+	MyLinkedList.AddAtHead(11)
+	fmt.Println(MyLinkedList.head)
+	// obj.AddAtHead(200)
 
 }
